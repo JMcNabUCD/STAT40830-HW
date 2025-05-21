@@ -1,0 +1,74 @@
+---
+title: "Homework 1"
+subtitle: "STAT40830"
+author: "Jeff McNab (22212996)"
+engine: knitr
+format:
+  pdf:
+    documentclass: article
+    papersize: A4
+    fig-dpi: 300
+execute: 
+  echo: false
+---
+
+# Overview
+
+In this report we will use the `iris` dataset[^1] to generate a set of plots. To better understand the dataset, we can examine the help file which contains the following description for the dataset.
+
+[^1]: Available in base `R`.
+
+::: {.callout-note appearance="minimal"}
+This famous (Fisher's or Anderson's) iris data set gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. The species are Iris setosa, versicolor, and virginica.
+:::
+
+Additionally, we can inspect structure of the dataset by creating a table of the first six observations.
+
+```{r}
+#| label: tbl-iris
+#| tbl-cap: First six observations of the `iris` dataset
+
+# output table using knitr::kable() method
+head(iris) |> knitr::kable()
+```
+
+
+# Plots
+
+We generate a set of histogram plots (@fig-histogram) using the `hist()` method. This shows the frequency of observed values amongths the four numerical variables in the dataset.
+
+```{r}
+#| label: fig-histogram
+#| fig-cap: "Histograms of the four numeric variables in the `iris` dataset."
+#| fig-subcap:
+#|   - "Sepal.Length"
+#|   - "Sepal.Width"
+#|   - "Petal.Length"
+#|   - "Petal.Width"
+#| layout: [[45, -10, 45], [45, -10, 45]]
+
+# iterate over column indices
+for(i in 1:4) {
+  # generate histograms, removing default main title
+  # and x-label
+  hist(iris[,i], main="", xlab="")
+}
+```
+
+From the plot, we can see that the `Sepal.Length` and `Sepal.Width` follow a normal distribution, while the `Petal.Length` and `Petal.Width` appear to follow a non-normal distribution, with a large number of observations near the left/lower side of the distribution. 
+
+---
+
+We next generate a pairs plot (@fig-pairs-plot)  using `pairs()` to analyse any correlation between the variables. Additionally, we have colored the points based on species of the observation.
+
+```{r}
+#| label: fig-pairs-plot
+#| fig-cap: "Pairs plot of the numerical values with each observation colored by species"
+#| fig-width: 8
+#| fig-height: 8
+
+# pairs plot of the iris dataset
+pairs(iris[, 1:4], col = iris[, 5])
+```
+
+From the plot, we can see some correlations occurring between different variables based on the species. For example, the `Sepal.Length` and `Petal.Length` seem to have a strong, positive correlation for the red and green observations, but not for the black observations. However, all observations seems to have a strong positive correlation between `Petal.Length` and `Petal.Width`.
