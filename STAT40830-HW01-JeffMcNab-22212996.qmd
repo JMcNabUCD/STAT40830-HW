@@ -47,12 +47,11 @@ We generate a set of histogram plots (@fig-histogram) using the `hist()` method.
 #|   - "Petal.Width"
 #| layout: [[45, -10, 45], [45, -10, 45]]
 
-# iterate over column indices
-for(i in 1:4) {
-  # generate histograms, removing default main title
-  # and x-label
-  hist(iris[,i], main="", xlab="")
-}
+# iterate over variables and generate histograms.
+# NOTE: removing default main title and x-labels.
+# Need to pipe into invisible() to prevent output
+apply(iris[,1:4], 2,
+      function(x) hist(x, main="", xlab="")) |> invisible()
 ```
 
 From the plot, we can see that the `Sepal.Length` and `Sepal.Width` follow a normal distribution, while the `Petal.Length` and `Petal.Width` appear to follow a non-normal distribution, with a large number of observations near the left/lower side of the distribution. 
