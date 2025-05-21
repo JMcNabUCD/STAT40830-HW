@@ -16,7 +16,7 @@ execute:
 
 In this report we will use the `iris` dataset[^1] to generate a set of plots. To better understand the dataset, we can examine the help file which contains the following description for the dataset.
 
-[^1]: Available in base `R`.
+[^1]: The `iris` dataset is available as part of the base `R` installation. No additional library is requried.
 
 ::: {.callout-note appearance="minimal"}
 This famous (Fisher's or Anderson's) iris data set gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. The species are Iris setosa, versicolor, and virginica.
